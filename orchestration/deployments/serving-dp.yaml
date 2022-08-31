@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: serving-dp
+  labels:
+    app: serving-app
+    type: serving
+    run: serving
+spec:
+  selector:
+    matchLabels:
+      run: serving
+  template:
+    metadata:
+      name: serving-pod
+      labels:
+        app: serving-app
+        type: serving
+        run: serving
+    spec:
+      containers:
+      - name: serving-app
+        image: kattsonbastos/serving-api:1.0
+        ports:
+        - containerPort: 8080
+  replicas: 1
